@@ -1,5 +1,10 @@
-#Provider Block
+#ACCOUNT ID
+variable "account_id" {
+  type = string
+  description = "Account ID, needed for role"
+}
 
+#Others
 variable "region" {
   type        = string
   description = "AWS region where resources will be deployed."

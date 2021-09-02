@@ -1,8 +1,6 @@
 module "test_airflow" {
     source = "./airflow"
-    providers = {
-    aws.current = aws.current
-    }    
+    account_id = local.account_id    
     environment = "test"
     region = "us-east-1"
     #VPC

@@ -1,10 +1,4 @@
-#Get Account ID for names of Roles/Policies
-data "aws_caller_identity" "current" {
-  provider = aws.current
-}
-
 locals {
-  account_id = data.aws_caller_identity.current.account_id
   tags = {
     Author = "Terraform"
   }
@@ -15,12 +9,13 @@ data "aws_availability_zones" "availability_zones" {
   state = "available"
 }
 
+#Policy Document
 data "aws_iam_policy_document" "iam_policy_document" {
   statement {
     sid       = ""
     actions   = ["airflow:PublishMetrics"]
     effect    = "Allow"
-    resources = ["arn:aws:airflow:${var.region}:${local.account_id}:environment/CentricityAirflow${var.environment}"]
+    resources = ["arn:aws:airflow:${var.region}:${var.account_id}:environment/mmdafegbuaAirflow${var.environment}"]
   }
 
   statement {
@@ -143,6 +138,6 @@ data "aws_iam_policy_document" "iam_policy_document" {
       "kms:Encrypt"
     ]
     effect        = "Allow"
-    resources = ["arn:aws:kms:*:${local.account_id}:key/*"]
+    resources = ["arn:aws:kms:*:${var.account_id}:key/*"]
   }
 }
